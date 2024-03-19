@@ -1,9 +1,14 @@
-import { HostListener, Component, Input, OnChanges, SimpleChanges, OnInit, DoCheck, ElementRef, ViewChild, ContentChild, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { ViewEncapsulation, HostListener, Component, Input, OnChanges, SimpleChanges, OnInit, DoCheck, ElementRef, ViewChild, ContentChild, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked } from '@angular/core';
 
 @Component({
   selector: 'app-child',
   templateUrl: './child.component.html',
-  styleUrl: './child.component.scss'
+  styleUrl: './child.component.scss',
+  styles: ['p { color:brown }'],
+   // encapsulation: ViewEncapsulation.Emulated, // this is default
+  //  encapsulation: ViewEncapsulation.None, // CSS se bi ghi de` neu config
+   encapsulation: ViewEncapsulation.ShadowDom, // se tao 1 tag shadow-root on view
+ 
 })
 export class ChildComponent implements OnChanges, OnInit, 
               DoCheck, AfterContentInit,
@@ -22,7 +27,7 @@ export class ChildComponent implements OnChanges, OnInit,
   @ContentChild('contentWrapper') content!: ElementRef;
 
   @Input() userName = "";
-
+  @Input() title = "Title ViewEncapsulation";
   ngOnChanges(changes: SimpleChanges): void {
     console.log('ngOnchanges triggered', changes);
     if (!changes['userName'].isFirstChange()) {
