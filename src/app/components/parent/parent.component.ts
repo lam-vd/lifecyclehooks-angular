@@ -6,7 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './parent.component.scss'
 })
 export class ParentComponent implements OnInit {
+  isChildDestroyed = false;
   userName = "Lamvd";
+
+  destroy() {
+    this.isChildDestroyed = true;
+  }
 
   ngOnInit(): void {
     console.log("onInit from parent component");
